@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        section {
+            background-color: #f8f8f8;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .recommendation {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .section_logo {
+            font-weight: bold;
+            font-size: 25px;
+            color: #333;
+        }
+        
+        .template-header {
+            font-size: 28px;
+            color: aquamarine;
+            background: rebeccapurple;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="template-header">Case Report</div>
+
+    <section id="caseInfo">
+        <div class="section_logo">Case Information</div>
+        <p><strong>Case Name:</strong> <span id="caseTitle">${data.case.title}</span> </p>
+        <p><strong>Case Type:</strong> <span id="caseAccountTypeTitle">${data.case.accountType.title}</span> </p>
+
+        <p><strong>Company Address:</strong> <table>
+            <thead>
+                <tr id="addressTableHeader">
+                    <th id="basicAddress">Basic Address</th>
+                    <th id="overallAddress">overAll Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for address in data.company.addresses %}
+                <tr id="addressTableRow_${address.index}">
+                    <td id="basicAddress_${address.index}">${address.line1}, ${address.line2}</td>
+
+                    <td id="overAllAddress_${address.index}">${address.city} ${address.zip_code}, ${address.state}, ${address.country}</td>
+                </tr>
+                {% end for %}
+            </tbody>
+        </table> </p>
+        <p><strong>Company Phone Numbers:</strong> <table>
+            <thead>
+                <tr id="phoneNumberTableHeader">
+                    <th id="countryPhone">Country</th>
+                    <th id="phoneNumberPhone">Phone Number</th>
+                    <th id="labelPhone">Label</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for phone in data.company.phoneNumbers %}
+                <tr id="phoneNumberTableRow_${phone.index}">
+                    <td id="country_${phone.index}">${phone.country}</td>
+                    <td id="phoneNumber_${phone.index}">${phone.phoneNumber}</td>
+                    <td id="label_${phone.index}">${phone.label}</td>
+                </tr>
+                {% end for %}
+            </tbody>
+        </table></p>
+    </section>
+
+<!--    Need to add this-->
+    <section>
+        <div class="section-header">Company Information</div>
+        <p><strong>Linked Company Name:</strong> <span id="companyDisplayName">${data.company.displayName}</span> </p>
+        <p><strong>Company Established In:</strong> <span id="companyDOBId">${data.company.customFields.dOB} </span></p>
+        <p><strong>Company Address:</strong> <table>
+            <thead>
+                <tr id="addressTableHeaderCompany">
+                    <th id="basicAddressCompany">Basic Address</th>
+                    <th id="overallAddressCompany">overAll Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for address in data.company.addresses %}
+                <tr id="addressTableRowCompany_${address.index}">
+                    <td id="basicAddressCompany_${address.index}">${address.line1}, ${address.line2}</td>
+
+                    <td id="overAllAddressCompany_${address.index}">${address.city} ${address.zip_code}, ${address.state}, ${address.country}</td>
+                </tr>
+                {% end for %}
+            </tbody>
+        </table> </p>
+        <p><strong>Company Revenue:</strong> <span id="companyRevenueId">${data.company.customFields.revenue}</span></p>
+    
+    </section>
+
+    <section>
+        <h2 class="section_logo">Financial Summary</h2>
+        <p><strong> Revenue: </strong> <span id="caseRevenueId">${data.case.customFields.revenue}</span></p>
+        <p><strong> Checked Flag: </strong> <span id="caseIsCheckedId">${data.case.customFields.isChecked}</span></p>
+      
+    </section>
+
+    <section>
+        <h2 class="section_logo">Credit History</h2>
+        <p><strong>Credit Score:</strong> <span id="companyCreditScoreId">${data.company.customFields.creditScore}</span></p>
+        <p><strong>Credit History (Is Good):</strong> <span id="companyIsHistoryStatusId">${data.company.customFields.isCreditHistoryGood}</span></p>
+    </section>
+
+    <section>
+        <h2 class="section_logo">Outstanding Debts</h2>
+        <p><strong>Existing Loans:</strong> <span id="caseExistingLoansId">${data.case.customFields.existingLoans}</span></p>
+        <p><strong>Mortgages:</strong> <span id="caseMortgagesId">${data.case.customFields.mortgages}</span></p>
+    </section>
+
+    <section>
+        <h2 class="section_logo">Loan Purpose and Repayment Plan</h2>
+        <p><strong>Purpose of the Loan:</strong> <span id="casePurposeOfLoanId">${data.case.customFields.loanPurpose}</span></p>
+        <!-- <p><strong>Proposed Repayment Schedule:</strong> <span id="caseRepaymentScheduleId">${data.case.customFields.repaymentShedule}</span></p> -->
+    </section>
+
+    <div class="recommendation">
+        <h2 class="section_logo">Recommendation</h2>
+        <p><span id="caseResult">The loan application is recommended for approval.</span></p>
+    </div>
+</body>
+
+</html>

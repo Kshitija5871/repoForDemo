@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="logPath">./logs</Property>
+        <Property name="rollingFileName">application</Property>
+        <Property name="consolePattern">%style{%d{dd-MMM-yyyy}}{underline,magenta} %style{%d{[HH:mm:ss]}}{cyan} [%p]
+            %highlight{%m%n%throwable}{FATAL=white, ERROR=red, WARN=yellow, INFO=magenta, DEBUG=blue, TRACE=green}
+        </Property>
+        <Property name="rollingFilePattern">%style{%d{dd-MMM-yyyy}}{underline,magenta} %style{%d{[HH:mm:ss]}}{cyan} [%p]
+            %highlight{%m%n%throwable}{FATAL=white, ERROR=red, WARN=yellow, INFO=magenta, DEBUG=blue, TRACE=green}
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="${consolePattern}"/>
+        </Console>
+
+        <RollingFile name="rollingFile" fileName="${logPath}/${rollingFileName}.log"
+                     filePattern="${logPath}/${rollingFileName}_%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout
+                    pattern="${rollingFilePattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 mb"/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="20"/>
+            <append>false</append>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+       <Root level="info" additivity="false">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="rollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

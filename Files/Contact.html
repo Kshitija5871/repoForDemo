@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application Report</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a237e;
+        }
+
+        section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            color: #1a237e;
+            font-size: 25px;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        .recommendation {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .template-header {
+            font-size: 28px;
+            color: aquamarine;
+            background: rebeccapurple;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="template-header">Contact Report</div>
+
+    <section>
+        <div class="section-header">Personal Information</div>
+        <p><strong>Name:</strong> <span id="contactDisplayName">${data.contact.displayName}</span> </p>
+
+        <p><strong>Address:</strong> <table>
+            <thead>
+                <tr id="addressTableHeader">
+                    <th id="basicAddress">Basic Address</th>
+                    <th id="overallAddress">overAll Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for address in data.contact.addresses %}
+                <tr id="addressTableRow_${address.index}">
+                    <td id="basicAddress_${address.index}">${address.line1}, ${address.line2}</td>
+
+                    <td id="overAllAddress_${address.index}">${address.city} ${address.zip_code}, ${address.state}, ${address.country}</td>
+                </tr>
+                {% end for %}
+            </tbody>
+        </table> </p>
+        <p><strong>Email:</strong> <table>
+            <thead>
+                <tr id="emailTableHeader">
+                    <th id="emailAddress">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for email in data.contact.emails %}
+                <tr id="emailTableRow_${email.index}">
+                    <td id="emailAddress_${email.index}">${email.email}</td>
+                </tr>
+                {% end for %}
+            </tbody>
+        </table></p>
+    
+    <p><strong>Social Security Number:</strong> <span id="contactSocialSecurityNumber">${data.contact.customFields.socialSecurityNumber}</span></p>
+    <p><strong>Passport Number:</strong> <span id="contactPassportNumber">${data.contact.customFields.passportNumber}</span></p>
+    </section>
+
+    <section>
+        <div class="section-header">Financial Summary</div>
+        <!--
+        20000
+        10000
+        5000
+-->
+        <p><strong>Revenue:</strong> <span id="contactRevenue">$${data.contact.customFields.revenue}</span></p>
+        <p><strong>Monthly Expenses:</strong> <span id="contactMonthlyExpenses">$${data.contact.customFields.monthlyExpenses}</span></p>
+        <p><strong>Outstanding Debts:</strong> <span id="contactOutstandingDebts">$${data.contact.customFields.outstandingDebts}</span></p>
+        <p><strong>Credit Score:</strong> <span id="contactCreditScore">${data.contact.customFields.creditScore}</span></p>
+        <p><strong>Credit History(Good/ Bad):</strong> <span id="contactCreditHistoryStatus">${data.contact.customFields.creditHistoryStatus}</span></p>
+    </section>
+
+    <section>
+        <div class="section-header">Loan Purpose and Repayment Plan</div>
+        <!--
+        Expansion of operations
+        Monthly payments with a 5% interest rate
+-->
+        <p><strong>Purpose of the Loan:</strong> <span id="contactPurposeOfLoan">${data.contact.customFields.purposeOfLoan}</span></p>
+        <p><strong>Proposed Repayment Schedule:</strong> <span id="contactRepaymentShedule">${data.contact.customFields.repaymentShedule}</span></p>
+    </section>
+
+    <div class="recommendation">
+        <div class="section-header">Recommendation</div>
+        <p><span id="contactResult">The loan application is recommended for approval.</span></p>
+    </div>
+</body>
+
+</html>

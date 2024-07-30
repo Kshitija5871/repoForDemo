@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Synapze Login Test Suite">
+    <listeners>
+        <listener class-name="listeners.AssignTestPriorityListener"/>
+        <listener class-name="listeners.ExtentListener"></listener>
+    </listeners>
+
+
+    <parameter name="browserName" value="Chrome"/>
+    <parameter name="urlLink" value="synapzeDevUrl"/>
+
+    <test name="Synapze Login Test cases">
+        <classes>
+            <class name="testcases.LoginPageTest"/>
+        </classes>
+    </test>
+
+</suite>
