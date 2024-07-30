@@ -1,4 +1,6 @@
 package pages;
 
-public class LoginPage {
+import base.TestBase;
+
+public class  LoginPage extends TestBase {
 }
