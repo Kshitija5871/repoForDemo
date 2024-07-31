@@ -4,5 +4,5 @@ import base.TestBase;
 
 public class  LoginPage extends TestBase {
     String name = "Kshitijaa";
-    String name = "Kshitija ";
+    String name1 = "Kshitija ";
 }
